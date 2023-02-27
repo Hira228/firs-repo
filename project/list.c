@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 typedef int Data;  //Тип Data int
-// Data pop(struct Node **list);
 
 struct Node
     {
@@ -11,9 +10,12 @@ struct Node
         struct Node *next;   // Указатель на слудющий элемент в списке типа указатель на струтуру
     }Node;
 
+
 void push (struct Node **list, Data x);
 void print_list(struct Node *list);    
 int is_empty(struct Node *list);
+Data pop(struct Node **list);
+
 int main()
 {
     Data test[] = {21, 17, 3, 10};
@@ -29,6 +31,13 @@ int main()
     }
     
     printf("Empty: %s\n", is_empty(list) ? "YES" : "NO");
+
+    while (!is_empty(list))
+    {
+        Data x = pop(&list);
+        printf("pop: %d ", x);
+        print_list(list);
+    }
 
     return 0;
 }
@@ -54,7 +63,11 @@ void push (struct Node **list, Data x)
     p->next = *list;
     *list = p;
 }
-// Data pop(struct Node **list)
-// {
-
-// }
+Data pop(struct Node **list)
+{
+    struct Node *p = *list;
+    Data res = p->data;
+    *list = p->next;
+    free(p);
+    return res;
+}
