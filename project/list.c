@@ -10,7 +10,8 @@ struct Node
         Data data;  //data типа Data
         struct Node *next;   // Указатель на слудющий элемент в списке типа указатель на струтуру
     }Node;
-    
+
+void print_list(struct Node *list);    
 
 int main()
 {
@@ -22,18 +23,19 @@ int main()
     b.next = &c;
     c.next = NULL;
 
-    struct Node *p;
-    p  = list;
-
-    printf("%d ", p->data);
-    p = p -> next;
-    printf("%d ", p->data);
-    p = p -> next;
-    printf("%d", p->data);
-    printf("\n");
+    print_list(list);
+    
     return 0;
 }
 
+void print_list(struct Node *list)
+{
+    for(struct Node *p = list;p != NULL;p = p->next)
+    {
+        printf("%d ", p->data);
+    }
+    printf("\n");
+}
 // void push (struct Node **list, Data x)
 // {
 
