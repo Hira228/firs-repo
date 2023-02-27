@@ -16,11 +16,16 @@ int main()
 {
     struct Node *list = NULL;  // lits зразу указывает на конец списка (Сначала список пуст)
     struct Node a = {3}, b = {17}, c = {21}, t = {10};
-    struct Node *list = &a;
+    list = &a;
     
     a.next = &b;
     b.next = &c;
     c.next = NULL;
+
+    printf("%d ", a.data);
+    printf("%d ", b.data);
+    printf("%d", c.data);
+    printf("\n");
     return 0;
 }
 
