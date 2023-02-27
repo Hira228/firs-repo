@@ -1,8 +1,8 @@
 //Пытаюсь разобраться со структурами и односвязными списками :))
 
 #include <stdio.h>
+#include <stdlib.h>
 typedef int Data;  //Тип Data int
-// void push (struct Node **list, Data x);
 // Data pop(struct Node **list);
 
 struct Node
@@ -11,6 +11,7 @@ struct Node
         struct Node *next;   // Указатель на слудющий элемент в списке типа указатель на струтуру
     }Node;
 
+void push (struct Node **list, Data x);
 void print_list(struct Node *list);    
 
 int main()
@@ -24,7 +25,10 @@ int main()
     c.next = NULL;
 
     print_list(list);
-    
+
+    push(&list, 111);
+
+    print_list(list);
     return 0;
 }
 
@@ -36,10 +40,13 @@ void print_list(struct Node *list)
     }
     printf("\n");
 }
-// void push (struct Node **list, Data x)
-// {
-
-// }
+void push (struct Node **list, Data x)
+{
+    struct Node *p = malloc(sizeof(struct Node));
+    p -> data = x;
+    p->next = *list;
+    *list = p;
+}
 // Data pop(struct Node **list)
 // {
 
