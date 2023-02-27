@@ -22,9 +22,14 @@ int main()
     b.next = &c;
     c.next = NULL;
 
-    printf("%d ", a.data);
-    printf("%d ", b.data);
-    printf("%d", c.data);
+    struct Node *p;
+    p  = list;
+
+    printf("%d ", p->data);
+    p = p -> next;
+    printf("%d ", p->data);
+    p = p -> next;
+    printf("%d", p->data);
     printf("\n");
     return 0;
 }
