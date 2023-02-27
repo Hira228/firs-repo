@@ -16,19 +16,15 @@ void print_list(struct Node *list);
 
 int main()
 {
+    Data test[] = {21, 17, 3, 10};
     struct Node *list = NULL;  // lits зразу указывает на конец списка (Сначала список пуст)
-    struct Node a = {3}, b = {17}, c = {21}, t = {10};
-    list = &a;
     
-    a.next = &b;
-    b.next = &c;
-    c.next = NULL;
+    for(size_t i = 0; i < sizeof(test) / sizeof(test[0]); i++)
+    {
+        push(&list, test[i]);
+        print_list(list);
+    }
 
-    print_list(list);
-
-    push(&list, 111);
-
-    print_list(list);
     return 0;
 }
 
