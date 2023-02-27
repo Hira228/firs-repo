@@ -13,19 +13,29 @@ struct Node
 
 void push (struct Node **list, Data x);
 void print_list(struct Node *list);    
-
+int is_empty(struct Node *list);
 int main()
 {
     Data test[] = {21, 17, 3, 10};
+    
     struct Node *list = NULL;  // lits зразу указывает на конец списка (Сначала список пуст)
+    
+    printf("Empty: %s\n", is_empty(list) ? "YES" : "NO");
     
     for(size_t i = 0; i < sizeof(test) / sizeof(test[0]); i++)
     {
         push(&list, test[i]);
         print_list(list);
     }
+    
+    printf("Empty: %s\n", is_empty(list) ? "YES" : "NO");
 
     return 0;
+}
+
+int is_empty(struct Node *list)
+{
+    return list == NULL;
 }
 
 void print_list(struct Node *list)
@@ -36,6 +46,7 @@ void print_list(struct Node *list)
     }
     printf("\n");
 }
+
 void push (struct Node **list, Data x)
 {
     struct Node *p = malloc(sizeof(struct Node));
