@@ -61,3 +61,5 @@ void print_element_list(struct Node *plist)
     }
     printf("\n");
 }
+
+//разобрался с push pop print ;)
