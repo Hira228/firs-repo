@@ -8,7 +8,7 @@
 void print_list(struct Node *list);
 void print_back(struct Node *list);
 void print_dbg(struct Node *list);
-void insert_node(struct Node *list);
+void insert_node(struct Node *p, struct Node *t);
 
 int main()
 {
@@ -32,10 +32,10 @@ int main()
     print_back(list);  // 21 17 3
     print_dbg(list);
     
-    u.prev = &a;  // 1
-    u.next = &b;  // 2
-    a.next = &u;  // 3
-    b.prev = &u;  // 4
+    struct Node *p = &a;
+    struct Node *t = &u;
+
+    insert_node(&a, &u);
 
     print_list(list);  // 3 10 17 21
     print_back(list);  // 21 17 10 3
@@ -69,4 +69,14 @@ void print_dbg(struct Node *list)
         printf("%d prev=%p %p next=%p\n", ptr -> data, ptr -> prev, ptr, ptr -> next);
     }
     printf("\n");
+}
+
+void insert_node(struct Node *p, struct Node *t)
+{
+    struct Node *q = p -> next;
+
+    t -> prev = p;  // 1
+    t -> next = q;  // 2
+    p -> next = t;  // 3
+    q -> prev = t;  // 4
 }
