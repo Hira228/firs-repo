@@ -21,6 +21,7 @@ void *push_back_node(struct Node *list, Data x);
 Data delete_node(struct Node *p);
 Data pop_front_node(struct Node *list);
 Data pop_back_node(struct Node *list);
+void list_clear(struct Node *list);
 
 int main()
 {
@@ -92,6 +93,15 @@ int list_is_empty(struct Node *list)
     return list->prev == list -> next && list -> next == list;
 }
 
+void list_clear(struct Node *list)
+{
+    while(!list_is_empty(list))
+    {
+        pop_front_node(list);
+        print_list(list);
+    }
+}
+
 void test_alloc_node()
 {
     struct Node z;
@@ -143,6 +153,8 @@ void test_alloc_node()
     print_list(list);       // 21 10
     printf("Deleted: %d\n", x);  // 8
 
+    list_clear(list);
+    printf("Empty %s\n", list_is_empty(list) ? "YES" : "NO");
 }
 
 void *push_front_node(struct Node *list, Data x)
