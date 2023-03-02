@@ -12,6 +12,7 @@ void insert_node(struct Node *p, struct Node *t);
 void insert_node_before(struct Node *p, struct Node *t);
 void init_node(struct Node *list);
 void list_remove_node(struct Node *t);
+int list_is_empty(struct Node *list);
 
 int main()
 {
@@ -123,4 +124,9 @@ void list_remove_node(struct Node *t)
 
     p -> next = q;
     q -> prev = p;
+}
+
+int list_is_empty(struct Node *list)
+{
+    return list->prev == list -> next && list -> next == list;
 }
