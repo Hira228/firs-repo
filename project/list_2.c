@@ -93,10 +93,5 @@ void insert_node(struct Node *p, struct Node *t)
 
 void insert_node_before(struct Node *p, struct Node *t)
 {
-    struct Node *q = p -> prev;
-
-    t -> next = p;  // 1
-    t -> prev = q;  // 2
-    p -> prev = t;  // 3
-    q -> next = t;  // 4
+    insert_node(p -> prev, t);
 }
