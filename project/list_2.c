@@ -26,10 +26,12 @@ int main()
     w.data = 8;
 
     init_node(list);
+    printf("Empty %s\n", list_is_empty(list) ? "YES" : "NO");
 
     insert_node(list, &c);
     print_list(list);        // 17
-
+    printf("Empty %s\n", list_is_empty(list) ? "YES" : "NO");
+    
     insert_node(list, &b);
     print_list(list);        // 17 21
 
