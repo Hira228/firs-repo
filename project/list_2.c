@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include "list_2.h"
 
-#define TEST_WITHOUT_ALLOC
 
 
 void print_list(struct Node *list);
@@ -19,6 +18,9 @@ int list_is_empty(struct Node *list);
 void test_alloc_node();
 void *push_front_node(struct Node *list, Data x);
 void *push_back_node(struct Node *list, Data x);
+Data delete_node(struct Node *p);
+Data pop_front_node(struct Node *list);
+Data pop_back_node(struct Node *list);
 
 int main()
 {
@@ -126,6 +128,20 @@ void test_alloc_node()
     printf("Pushed: %d\n", t -> data);
     printf("Empty %s\n", list_is_empty(list) ? "YES" : "NO");
 
+    t = list -> next -> next; // 17
+    Data x;
+
+    x = delete_node(t);
+    print_list(list);       // 3 21 10 8
+    printf("Deleted: %d\n", x);
+
+    x = pop_front_node(list); 
+    print_list(list);       // 21 10 8
+    printf("Deleted: %d\n", x);  // 3
+
+    x = pop_back_node(list); 
+    print_list(list);       // 21 10
+    printf("Deleted: %d\n", x);  // 8
 
 }
 
@@ -142,6 +158,22 @@ void *push_back_node(struct Node *list, Data x)
     push_front_node(list -> prev, x);
 }
 
+Data delete_node(struct Node *p)
+{
+    list_remove_node(p);
+    Data x = p -> data;
+    return x;
+}
+
+Data pop_front_node(struct Node *list)
+{
+    return delete_node(list -> next);
+}
+
+Data pop_back_node(struct Node *list)
+{
+    return delete_node(list -> prev);
+}
 
 void test_without_alloc()
 {
