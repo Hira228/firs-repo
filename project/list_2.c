@@ -22,10 +22,16 @@ Data delete_node(struct Node *p);
 Data pop_front_node(struct Node *list);
 Data pop_back_node(struct Node *list);
 void list_clear(struct Node *list);
+void test_foreach_node();
+void foreach_node(struct Node *list, void (*func)(Data x, void *arg), void *arg);
+void print_list1(struct Node *list, FILE *fout);
+void print_it_node(Data x, void *arg);
+void sum_it_list(Data x, void *a);
+void sum_list(struct Node *list, Data *res);
 
 int main()
 {
-   test_alloc_node();
+   test_foreach_node();
 }
 
 void print_list(struct Node *list)
@@ -93,14 +99,6 @@ int list_is_empty(struct Node *list)
     return list->prev == list -> next && list -> next == list;
 }
 
-void list_clear(struct Node *list)
-{
-    while(!list_is_empty(list))
-    {
-        pop_front_node(list);
-        print_list(list);
-    }
-}
 
 void test_alloc_node()
 {
@@ -187,6 +185,19 @@ Data pop_back_node(struct Node *list)
     return delete_node(list -> prev);
 }
 
+void list_clear(struct Node *list)
+{
+    while(!list_is_empty(list))
+    {
+        pop_front_node(list);
+        print_list(list);
+        printf("\n");
+    }
+    
+    printf("Empty %s\n", list_is_empty(list) ? "YES" : "NO");
+    printf("\n");
+}
+
 void test_without_alloc()
 {
     struct Node z, a, b, c, u, w;
@@ -239,4 +250,67 @@ void test_without_alloc()
     list_remove_node(&w);
     print_list(list);   // 3 17 21
     print_back(list);   // 21 17 3
+}
+
+void test_foreach_node()
+{
+    struct Node z;
+    struct Node *list = &z;
+
+    Data test_data1 [] = {8, 10, 21, 17, 3};
+    
+    init_node(list);
+
+    for(size_t i = 0; i < sizeof(test_data1) / sizeof(test_data1[0]); i++)
+    {
+        push_front_node(list, test_data1[i]);
+        print_list(list);
+        printf("To stdin:\n");
+        print_list1(list, stdin);
+        printf("To stdout:\n");
+        print_list1(list, stdout);
+    }
+
+    Data sum = 0;
+
+    foreach_node(list, sum_it_list, &sum);
+    printf("Sum is %d\n", sum);
+    list_clear(list);
+}
+
+void print_it_node(Data x, void *arg)
+{
+    fprintf((FILE*)arg, "%d ", x);
+}
+
+void print_list1(struct Node *list, FILE *fout)
+{
+    foreach_node(list, print_it_node, fout);
+    fprintf(fout, "\n");
+}
+
+void foreach_node(struct Node *list, void (*func)(Data x, void *arg), void *arg)
+{
+    for(struct Node *ptr = list -> next; ptr != list; ptr = ptr -> next)
+    {
+        func(ptr -> data, arg);
+    }
+
+    printf("\n");
+}
+
+void sum_all(struct Node *list, Data *res)
+{
+    *res = 0;
+
+    for(struct Node *ptr = list -> next; ptr != list; ptr = ptr -> next)
+    {
+        *res = *res + ptr -> data;
+    }
+}
+
+void sum_it_list(Data x, void *a)
+{
+    Data *res = (Data *)a;
+    *res = *res + x;
 }
