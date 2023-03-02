@@ -10,10 +10,11 @@ void print_back(struct Node *list);
 void print_dbg(struct Node *list);
 void insert_node(struct Node *p, struct Node *t);
 void insert_node_before(struct Node *p, struct Node *t);
+void init_node(struct Node *list);
 
 int main()
 {
-    struct Node z, a = {3}, b = {17}, c = {21}, u = {10} , w = {8};
+    struct Node z, a, b, c, u, w;
     struct Node *list = &z;
     z.data = 0;
     a.data = 3;
@@ -21,17 +22,21 @@ int main()
     c.data = 21;
     u.data = 10;
     w.data = 8;
-    z.next = &a;
-    z.prev = &c;
-    a.next = &b;
-    a.prev = &z;
-    b.next = &c;
-    b.prev = &a;
-    c.next = &z;
-    c.prev = &b;
+
+    init_node(list);
+
+    insert_node(list, &c);
+    print_list(list);        // 17
+
+    insert_node(list, &b);
+    print_list(list);        // 17 21
+
+    insert_node(list, &a);
+    print_list(list);        // 3 17 21
 
     print_list(list);  // 3 17 21
     print_back(list);  // 21 17 3
+    
     print_dbg(list);
     
     struct Node *p = &a;
@@ -94,4 +99,10 @@ void insert_node(struct Node *p, struct Node *t)
 void insert_node_before(struct Node *p, struct Node *t)
 {
     insert_node(p -> prev, t);
+}
+
+void init_node(struct Node *list)
+{
+    list -> prev = list;
+    list -> next = list;
 }
