@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "list.h"
-#include "function_list.c"
+#include "function_list.h"
 #include "process_list.c"
 
 int main()
