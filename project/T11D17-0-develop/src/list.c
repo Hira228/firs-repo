@@ -4,11 +4,12 @@
 
 int main()
 {
+    struct door d = {1, 1};
 
-    struct door *door = NULL;
+    struct door *door = &d;
     struct node *elem = NULL;
     elem = add_door(elem, door);
-    printf("%d", elem -> door.status);
+    printf("%d %d\n", elem -> door.id, elem -> door.status);
 
     //scanf("%d", &(door -> status));
     //elem = add_door(elem, door);
@@ -28,8 +29,9 @@ struct node *init (struct door *door)
 struct node *add_door (struct node *elem, struct door *door)
 {
     struct node *ptr = malloc(sizeof(struct node));
-    ptr -> door.status = 12;
     ptr -> next = elem;
+    ptr -> door.id = door -> id;
+    ptr -> door.status = door -> status;
     elem = ptr;
     return elem;
 }
