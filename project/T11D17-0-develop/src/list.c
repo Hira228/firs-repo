@@ -4,21 +4,17 @@
 
 int main()
 {
-    struct door d = {1, 1};
-
-    struct door *door = &d;
+    struct door tests[] = {{1, 1}, {2, 2}, {3, 3}};
+    struct door *door = NULL;
     struct node *elem = NULL;
-    elem = add_door(elem, door);
-    printf("%d %d\n", elem -> door.id, elem -> door.status);
-
-    //scanf("%d", &(door -> status));
-    //elem = add_door(elem, door);
-
-    // while (elem != NULL)
-    // {
-    //     printf("%d", elem -> door.status);
-    //     elem = elem -> next;
-    // }
+    
+    for (int i = 0; i < sizeof(tests) / sizeof(tests[0]); i++)
+    {
+        door = &tests[i];
+        elem = add_door(elem, door);
+        printf("%d %d\n", elem -> door.id, elem -> door.status);
+    }
+    
 }
 
 struct node *init (struct door *door)
