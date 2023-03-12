@@ -1,5 +1,5 @@
 struct stack
 {
-    int counter;
-    int ptr[10];
+    int data;
+    struct stack *next;
 }stack;
