@@ -5,26 +5,15 @@
 
 int main()
 {
-    struct Node
-        one =   {1, NULL, NULL},
-        two =   {2, NULL, NULL},
-        three = {3, NULL, NULL},
-        five =  {5, NULL, NULL},
-        six =   {6, NULL, NULL},
-        seven = {7, NULL, NULL},
-        eight = {8, NULL, NULL},
-        nine =  {9, NULL, NULL};
-
     struct Node *tree = NULL;   // Указатель на корень
-    tree = &seven;
-    seven.left = &three;
-    seven.right = &nine;
-    three.left = &two;
-    two.left = &one;
-    three.right = &five;
-    nine.left = &eight;
-    
-    print(tree);
+    Data tests_data[] = {7, 3, 2, 1, 9, 5, 4, 6};
+
+    for (size_t i = 0; i < sizeof(tests_data) / sizeof(tests_data[0]); i++)
+    {
+        tree = add_tree(tree, tests_data[i]);
+        print(tree);
+    }
+
 }
 
 void print_tree(struct Node *tree)
@@ -44,7 +33,31 @@ void print_tree(struct Node *tree)
 }
 
 void print(struct Node *tree)
+
 {
     print_tree(tree);
     printf("\n");
+}
+
+struct Node *add_tree(struct Node *tree, Data x)
+{
+    if (tree == NULL)
+    {
+        struct Node *ptr = malloc(sizeof(struct Node));
+        ptr -> data = x;
+        ptr -> left = ptr -> right = NULL;
+        print(tree);
+        return ptr;
+    }
+
+    if (x < tree -> data)
+    {
+        tree -> left = add_tree(tree -> left, x);
+    }
+
+    if(x > tree -> data)
+    {
+        tree -> right = add_tree(tree -> right, x);
+    }
+    return tree;
 }
