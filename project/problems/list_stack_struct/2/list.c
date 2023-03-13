@@ -40,7 +40,7 @@ int main()
     destroy(&elem);
 
  
-    new_insert_elem = insert(elem, 0, 111);
+    insert(elem, 0, 111);
     print_list(elem);
 }
 
@@ -95,9 +95,10 @@ void destroy(struct node** root)
     free(ptr);
 }
 
-struct node *insert(struct node *elem, int n, int value)
+void insert(struct node *elem, int n, int value)
 {
     int i = 0;
+    
     while (i < n && elem -> next != NULL)
     {
         elem = elem -> next;
@@ -117,5 +118,4 @@ struct node *insert(struct node *elem, int n, int value)
         ptr -> next = NULL;
     }
     elem -> next = ptr;
-    return ptr;
 }

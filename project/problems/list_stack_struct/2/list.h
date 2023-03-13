@@ -11,4 +11,4 @@ struct node *find_door(int door_id, struct node *root);
 void destroy(struct node** root);
 void print_list(struct node *elem);
 int list_is_empty(struct node *elem);
-struct node *insert(struct node *elem, int n, int value);
+void insert(struct node *elem, int n, int value);
